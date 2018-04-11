@@ -1,20 +1,23 @@
 #!/user
 # -*- coding: utf-8 -*-
+
 import locale
 import Tkinter as Tk
 
 locale.setlocale(locale.LC_ALL, '')
 root = Tk.Tk()
 root.title("My Tax Calculator")
-root.geometry("700x200")
+root.geometry("650x200")
+
+TaxFreeNum = 11850
 
 
 def callback():
     GetGrossTax = GrossTaxIn.get()
-    GrossYear = int(GetGrossTax)
+    GrossYear = float(GetGrossTax)
     GrossMonth = GrossYear/12
     GrossWeek = GrossYear/52
-    GrossDay = GrossYear/365
+    GrossDay = GrossYear/260
     Yearli = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossYear))
     Yearli.grid(row=1, column=1)
     Monthli = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossMonth))
@@ -24,9 +27,29 @@ def callback():
     Dayli = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossDay))
     Dayli.grid(row=1, column=4)
 
+    TaxFreeYear = Tk.Label(RightFrame, text='£{:,.2f}'.format(TaxFreeNum))
+    TaxFreeYear.grid(row=2, column=1)
+    TaxFreeMonth = Tk.Label(RightFrame, text='£{:,.2f}'.format(TaxFreeNum/12))
+    TaxFreeMonth.grid(row=2, column=2)
+    TaxFreeWeek = Tk.Label(RightFrame, text='£{:,.2f}'.format(TaxFreeNum/52))
+    TaxFreeWeek.grid(row=2, column=3)
+    TaxFreeDay = Tk.Label(RightFrame, text='£{:,.2f}'.format(TaxFreeNum / 260))
+    TaxFreeDay.grid(row=2, column=4)
 
-LeftFrame = Tk.Frame(root, bg="blue", width=300, height=200, pady=3)
-RightFrame = Tk.Frame(root, bg="red", width=400, height=200, pady=3)
+    TotalTaxableYear = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossYear - TaxFreeNum))
+    TotalTaxableYear.grid(row=3, column=1)
+    TotalTaxableMonth = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossMonth - TaxFreeNum/12))
+    TotalTaxableMonth.grid(row=3, column=2)
+    TotalTaxableWeekly = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossWeek - TaxFreeNum/52))
+    TotalTaxableWeekly.grid(row=3, column=3)
+    TotalTaxableDaily = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossDay - TaxFreeNum/365))
+    TotalTaxableDaily.grid(row=3, column=4)
+
+    
+
+
+LeftFrame = Tk.Frame(root, width=300, height=200, pady=3)
+RightFrame = Tk.Frame(root,  width=400, height=200, pady=3)
 
 LeftFrame.grid(sticky="n", row=0,column=0)
 RightFrame.grid(sticky="n", row=0, column=1)
