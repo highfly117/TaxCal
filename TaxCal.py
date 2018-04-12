@@ -13,7 +13,6 @@ TaxFreeNum = 11850
 
 
 
-
 def callback():
     GetGrossTax = GrossTaxIn.get()
     GrossYear = float(GetGrossTax)
@@ -38,14 +37,24 @@ def callback():
     TaxFreeDay = Tk.Label(RightFrame, text='£{:,.2f}'.format(TaxFreeNum / 260))
     TaxFreeDay.grid(row=2, column=4)
 
-    TotalTaxableYear = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossYear - TaxFreeNum))
-    TotalTaxableYear.grid(row=3, column=1)
-    TotalTaxableMonth = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossMonth - TaxFreeNum / 12))
-    TotalTaxableMonth.grid(row=3, column=2)
-    TotalTaxableWeekly = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossWeek - TaxFreeNum / 52))
-    TotalTaxableWeekly.grid(row=3, column=3)
-    TotalTaxableDaily = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossDay - TaxFreeNum / 365))
-    TotalTaxableDaily.grid(row=3, column=4)
+    if GrossYear > 11850:
+        TotalTaxableYear = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossYear - TaxFreeNum))
+        TotalTaxableYear.grid(row=3, column=1)
+        TotalTaxableMonth = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossMonth - TaxFreeNum / 12))
+        TotalTaxableMonth.grid(row=3, column=2)
+        TotalTaxableWeekly = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossWeek - TaxFreeNum / 52))
+        TotalTaxableWeekly.grid(row=3, column=3)
+        TotalTaxableDaily = Tk.Label(RightFrame, text='£{:,.2f}'.format(GrossDay - TaxFreeNum / 365))
+        TotalTaxableDaily.grid(row=3, column=4)
+    else:
+        TotalTaxableYear = Tk.Label(RightFrame, text='£0.00')
+        TotalTaxableYear.grid(row=3, column=1)
+        TotalTaxableMonth = Tk.Label(RightFrame, text='£0.00')
+        TotalTaxableMonth.grid(row=3, column=2)
+        TotalTaxableWeekly = Tk.Label(RightFrame, text='£0.00')
+        TotalTaxableWeekly.grid(row=3, column=3)
+        TotalTaxableDaily = Tk.Label(RightFrame, text='£0.00')
+        TotalTaxableDaily.grid(row=3, column=4)
 
     if GrossYear > 150000:
         AdditionalRate = GrossYear - 150000
@@ -118,7 +127,7 @@ GrossTaxLa.grid(row=4, column=0)
 GrossTaxIn = Tk.Entry(LeftFrame)
 GrossTaxIn.grid(row=4, column=1)
 
-TaxCalGo = Tk.Button(LeftFrame, text="Calculate My Wage")
+TaxCalGo = Tk.Button(LeftFrame, text="Calculate My Wage", command=callback)
 TaxCalGo.grid(row=5, column=1)
 
 Summary = Tk.Label(RightFrame, text="Salary Summary", width=15)
