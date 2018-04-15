@@ -147,11 +147,14 @@ TopFrame = Tk.Frame(root, width=775, height=20)
 LeftFrame = Tk.Frame(root, width=300, height=200, pady=5, padx=5)
 RightFrame = Tk.Frame(root, width=400, height=200, pady=5, padx=5)
 
-RightFrame.config(borderwidth=5, relief="sunken" )
+
+TopFrame.config(borderwidth=2, relief="ridge")
+LeftFrame.config(borderwidth=2, relief="ridge")
+RightFrame.config(borderwidth=2, relief="ridge")
 
 TopFrame.grid(sticky="n", row=0, column=0, columnspan=2)
-LeftFrame.grid(sticky="nw", row=1, column=0, padx=10)
-RightFrame.grid(sticky="nw", row=1, column=1, padx=10)
+LeftFrame.grid(sticky="nw", row=1, column=0, pady=5, padx=(5,0))
+RightFrame.grid(sticky="nw", row=1, column=1,pady=5)
 
 
 TaxYearOp = Tk.StringVar()
