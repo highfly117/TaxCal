@@ -7,7 +7,7 @@ import Tkinter as Tk
 locale.setlocale(locale.LC_ALL, '')
 root = Tk.Tk()
 root.title("My Tax Calculator")
-root.geometry("700x225")
+root.geometry("775x280")
 
 TaxFreeNum = 11850
 
@@ -143,11 +143,16 @@ def callback():
     TotalNetWagesDailyLi.grid(row=10, column=4)
 
 
-LeftFrame = Tk.Frame(root, width=300, height=200, pady=3)
-RightFrame = Tk.Frame(root, width=400, height=200, pady=3)
+TopFrame = Tk.Frame(root, width=775, height=20)
+LeftFrame = Tk.Frame(root, width=300, height=200, pady=5, padx=5)
+RightFrame = Tk.Frame(root, width=400, height=200, pady=5, padx=5)
 
-LeftFrame.grid(sticky="n", row=0, column=0)
-RightFrame.grid(sticky="n", row=0, column=1)
+RightFrame.config(borderwidth=5, relief="sunken" )
+
+TopFrame.grid(sticky="n", row=0, column=0, columnspan=2)
+LeftFrame.grid(sticky="nw", row=1, column=0, padx=10)
+RightFrame.grid(sticky="nw", row=1, column=1, padx=10)
+
 
 TaxYearOp = Tk.StringVar()
 TaxYearOp.set("2018/2019")  # default value
@@ -156,39 +161,41 @@ StudentLoanOp = Tk.StringVar()
 StudentLoanOp.set("No")
 
 TaxYear = Tk.Label(LeftFrame, text="Select tax year")
-TaxYear.grid(row=1, column=0)
+TaxYear.grid(row=1, column=0, sticky="w", pady=(5,0))
 
 Placeholder = Tk.Label(LeftFrame, text="")
-Placeholder.grid(row=1, column=1)
+Placeholder.grid(row=1, column=1, sticky="e")
 
 TaxYearLi = Tk.OptionMenu(Placeholder, TaxYearOp, "2018/2019")
-TaxYearLi.grid(row=1, column=1)
+TaxYearLi.config(width=10)
+TaxYearLi.grid(row=1, column=1, sticky="e", pady=(5,0))
 
 StudentLoan = Tk.Label(LeftFrame, text="Repay Student Loan?")
-StudentLoan.grid(row=2, column=0)
+StudentLoan.grid(row=2, column=0, sticky="w")
 
 Placeholder2 = Tk.Label(LeftFrame, text="")
-Placeholder2.grid(row=2, column=1)
+Placeholder2.grid(row=2, column=1, sticky="e", pady=(5,0))
 
 StudentLoanLi = Tk.OptionMenu(Placeholder2, StudentLoanOp, "No", "Plan 1", "Plan 2", command=lambda _: getStudentLoan())
-StudentLoanLi.grid(row=2, column=1)
+StudentLoanLi.config(width=10)
+StudentLoanLi.grid(row=2, column=1,sticky="e")
 
 Pension = Tk.Label(LeftFrame, text="Pension contributions (£ or %)")
-Pension.grid(row=3, column=0)
+Pension.grid(row=3, column=0, pady=(7,0))
 
-PensionEn = Tk.Entry(LeftFrame)
-PensionEn.grid(row=3, column=1)
+PensionEn = Tk.Entry(LeftFrame, width=16)
+PensionEn.grid(row=3, column=1, sticky="e", pady=(7,0))
 
 GrossTaxLa = Tk.Label(LeftFrame, text="Pre-Tax earnings here! >")
-GrossTaxLa.grid(row=4, column=0)
+GrossTaxLa.grid(row=4, column=0, sticky="w", pady=(13,0))
 
-GrossTaxIn = Tk.Entry(LeftFrame)
-GrossTaxIn.grid(row=4, column=1)
+GrossTaxIn = Tk.Entry(LeftFrame, width=16)
+GrossTaxIn.grid(row=4, column=1, sticky="e" , pady=(13,0))
 
-TaxCalGo = Tk.Button(LeftFrame, text="Calculate My Wage", command=callback)
-TaxCalGo.grid(row=5, column=1)
+TaxCalGo = Tk.Button(LeftFrame, text="Calculate My Wage", command=callback, width=16)
+TaxCalGo.grid(row=5, column=1, pady=(15,0))
 
-Summary = Tk.Label(RightFrame, text="Salary Summary", width=15)
+Summary = Tk.Label(RightFrame, text="Salary Summary", width=15, anchor="e")
 Summary.grid(row=0, column=0)
 Yearly = Tk.Label(RightFrame, text="Year", width=10)
 Yearly.grid(row=0, column=1)
@@ -199,27 +206,26 @@ Weekly.grid(row=0, column=3)
 Daily = Tk.Label(RightFrame, text="Daily", width=10)
 Daily.grid(row=0, column=4)
 
-Summary = Tk.Label(RightFrame, text="Salary Summary", width=15)
-Summary.grid(row=0, column=0)
-GrossPay = Tk.Label(RightFrame, text="Gross Pay", width=15)
+
+GrossPay = Tk.Label(RightFrame, text="Gross Pay", width=15, anchor="e")
 GrossPay.grid(row=1, column=0)
-TaxFree = Tk.Label(RightFrame, text="Tax Free Allowance", width=15)
+TaxFree = Tk.Label(RightFrame, text="Tax Free Allowance", width=15, anchor="e")
 TaxFree.grid(row=2, column=0)
-TotalTaxable = Tk.Label(RightFrame, text="Total Taxable", width=15)
+TotalTaxable = Tk.Label(RightFrame, text="Total Taxable", width=15, anchor="e")
 TotalTaxable.grid(row=3, column=0)
-Tax20 = Tk.Label(RightFrame, text="20% rate", width=15)
+Tax20 = Tk.Label(RightFrame, text="20% rate", width=15, anchor="e")
 Tax20.grid(row=4, column=0)
-Tax40 = Tk.Label(RightFrame, text="40% rate", width=15)
+Tax40 = Tk.Label(RightFrame, text="40% rate", width=15, anchor="e")
 Tax40.grid(row=5, column=0)
-Tax45 = Tk.Label(RightFrame, text="45% rate", width=15)
+Tax45 = Tk.Label(RightFrame, text="45% rate", width=15, anchor="e")
 Tax45.grid(row=6, column=0)
-StudentTax = Tk.Label(RightFrame, text="Student Loan", width=15)
+StudentTax = Tk.Label(RightFrame, text="Student Loan", width=15, anchor="e")
 StudentTax.grid(row=7, column=0)
-NI = Tk.Label(RightFrame, text="National Insurance", width=15)
+NI = Tk.Label(RightFrame, text="National Insurance", width=15, anchor="e")
 NI.grid(row=8, column=0)
-TotalDeductions = Tk.Label(RightFrame, text="Total Deductions", width=15)
+TotalDeductions = Tk.Label(RightFrame, text="Total Deductions", width=15, anchor="e")
 TotalDeductions.grid(row=9, column=0)
-NetWage = Tk.Label(RightFrame, text="Net Wage", width=15)
+NetWage = Tk.Label(RightFrame, text="Net Wage", width=15, anchor="e")
 NetWage.grid(row=10, column=0)
 
 Tk.mainloop()
