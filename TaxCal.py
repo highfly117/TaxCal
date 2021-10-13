@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import math
 import locale
-import Tkinter as Tk
+import tkinter as Tk
 
 locale.setlocale(locale.LC_ALL, '')
 root = Tk.Tk()
@@ -15,7 +15,7 @@ TaxFreeNum = 11850
 def getStudentLoan():
     global StudentLoan
     StudentLoan = StudentLoanOp.get()
-    print StudentLoan
+    print (StudentLoan)
 
 def callback():
     GetGrossTax = GrossTaxIn.get()
